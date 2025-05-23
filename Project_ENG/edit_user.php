@@ -46,8 +46,7 @@ if (isset($_POST['update_user'])) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #FFDEE9 10%, #B5FFFC 100%);
-            color: #333;
+            background-color: #ddd;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -112,7 +111,7 @@ if (isset($_POST['update_user'])) {
             <select name="role" required>
                 <option value="manager" <?php echo ($user['role'] == 'manager') ? 'selected' : ''; ?>>Manager</option>
                 <option value="admin" <?php echo ($user['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
-                <option value="customer" <?php echo ($user['role'] == 'customer') ? 'selected' : ''; ?>>Customer</option>
+                <option value="Employee" <?php echo ($user['role'] == 'Employee') ? 'selected' : ''; ?>>Employee</option>
             </select>
             
             <button type="submit" name="update_user">Update User</button>

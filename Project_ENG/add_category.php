@@ -2,6 +2,10 @@
 session_start();
 include 'db.php';
 
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+    header("Location: index.php");
+    exit();
+}
 if (isset($_POST['add_category'])) {
     $name = $_POST['name'];
     
@@ -23,8 +27,7 @@ if (isset($_POST['add_category'])) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #FFDEE9 10%, #B5FFFC 100%);
-            color: #333;
+            background-color: #ddd;
             text-align: center;
             margin: 0;
             padding: 0;

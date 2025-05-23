@@ -18,18 +18,25 @@ $categories = $conn->query("SELECT * FROM categories");
     <title>Manage Categories</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: "Kanit", sans-serif;
             color: black;
             text-align: center;
             margin: 0;
             padding: 0;
         }
+        .kanit-regular {
+            font-family: "Kanit", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
         .container {
             max-width: 800px;
             margin: 50px auto;
             padding: 30px;
-            background: rgba(51, 51, 51, 0.29);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
         }

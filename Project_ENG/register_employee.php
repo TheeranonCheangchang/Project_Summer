@@ -1,5 +1,10 @@
 <?php
+session_start();
 include 'db.php';
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+    header("Location: index.php");
+    exit();
+}
 
 if (isset($_POST['register_employee'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -46,8 +51,7 @@ if (isset($_POST['register_employee'])) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #70e1f5 10%, #ffd194 100%);
-            color: #333;
+            background-color: #ddd;
             text-align: center;
             margin: 0;
             padding: 0;

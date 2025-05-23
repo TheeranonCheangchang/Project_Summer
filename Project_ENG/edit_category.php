@@ -1,9 +1,9 @@
 <?php
 session_start();
+
 include 'db.php';
 
-
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     header("Location: index.php");
     exit();
 }
