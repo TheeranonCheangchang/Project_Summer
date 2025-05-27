@@ -1,7 +1,8 @@
 <?php
 session_start();
 include 'db.php';
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager' && $_SESSION['user']['role'] != 'admin') {
     header("Location: index.php");
     exit();
 }
@@ -19,7 +20,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users</title>
+    <title>จัดการผู้ใช้งาน</title>
     <link rel="stylesheet" href="sidebar_menu\sidebar.css">
     <style>
     .container {
@@ -106,17 +107,17 @@ $result = mysqli_query($conn, $sql);
 <body>
     <?php include 'sidebar_menu\sidebar.php'; ?>
     <div class="container">
-        <h2>Manage Users</h2>
+        <h2>จัดการผู้ใช้งาน</h2>
         <table>
             <tr>
-                <th>ID</th>
+                <th>รหัส</th>
                 <th>ชื่อผู้ใช้งาน</th>
                 <th>ชื่อจริง</th>
                 <th>นามสกุล</th>
                 <th>แผนก</th>
                 <th>อีเมล</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th>หน้าที่</th>
+                <th>รายละเอียด</th>
             </tr>
             <?php while ($user = $result->fetch_assoc()): ?>
             <tr>
@@ -134,7 +135,8 @@ $result = mysqli_query($conn, $sql);
             </tr>
             <?php endwhile; ?>
         </table>
-        <a href="register_employee.php" class="add-user">Add New Employee</a>
+        <a href="register_employee.php" class="add-user">เพิ่มพนักงานใหม่</a>
+        <a href="add_admin.php" class="add-user">เพิ่มผู้ดูแลใหม่</a>
     </div>
 </body>
 </html>

@@ -1,12 +1,12 @@
 CREATE DATABASE stock_management;
 USE stock_management;
 
--- ตารางผู้ใช้
+-- ตารางผู้ใช้ manager supervisor technician
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role ENUM('Super_admin', 'admin','employee','Root') NOT NULL,
+    role ENUM('Super_admin', 'admin','employee','manager') NOT NULL,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
@@ -17,9 +17,9 @@ VALUES ('admin', MD5('1234'), 'admin', 'My', 'Admin', 'admin@example.com');
 INSERT INTO users (username, password, role, firstname, lastname, email) 
 VALUES ('employee', MD5('1234'), 'employee', 'New', 'Employee', 'employee@example.com');
 INSERT INTO users (username, password, role, firstname, lastname, email) 
-VALUES ('Super_admin', MD5('1234'), 'Super_admin', 'Super', 'Admin', 'Super_admin@example.com');
+VALUES ('Supervisor', MD5('1234'), 'Super_admin', 'Super', 'Admin', 'Super_admin@example.com');
 INSERT INTO users (username, password, role, firstname, lastname, email) 
-VALUES ('Root', MD5('1234'), 'Root', 'My', 'Root', 'Root@example.com');
+VALUES ('manage', MD5('1234'), 'manager', 'My', 'manage', 'manage@example.com');
 
 -- ตารางหมวดหมู่
 CREATE TABLE categories (

@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager' && $_SESSION['user']['role'] != 'admin') {
     header("Location: index.php");
     exit();
 }
@@ -16,39 +16,7 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8">
   <title>ระบบแจ้งซ่อม</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="sidebar_menu\sidebar.css">
-  <style>
-    table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            border-radius: 10px;
-            overflow:initial;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            color: black;
-        }
-        th {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        button {
-            width: 50%;
-            padding: 2px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-  </style>
+  <link rel="stylesheet" href="sidebar_menu/sidebar.css">
 </head>
 <body>
   <?php include 'sidebar_menu\sidebar.php'; ?>
@@ -57,7 +25,6 @@ $result = $conn->query($sql);
       <h2>รายการแจ้งซ่อม</h2>
       <a href="new_repair.php" class="option-card logout">+ แจ้งซ่อมใหม่</a>
     </div>
-
     <table class="table table-bordered table-hover bg-white">
       <thead class="table-light">
       <tr>

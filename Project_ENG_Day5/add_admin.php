@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin' && $_SESSION['user']['role'] != 'manager') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager') {
     header("Location: index.php");
     exit();
 }
@@ -37,7 +37,7 @@ if (isset($_POST['register_employee'])) {
     $hashed_password = md5($password);
 
     $sql = "INSERT INTO users (username, password, firstname, lastname, email, role, category_id)
-            VALUES ('$username', '$hashed_password', '$firstname', '$lastname', '$email', 'employee', '$category_id')";
+            VALUES ('$username', '$hashed_password', '$firstname', '$lastname', '$email', 'admin', '$category_id')";
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Employee registered successfully!'); window.location='manage_users.php';</script>";
     } else {

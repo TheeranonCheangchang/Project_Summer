@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         $_SESSION['user'] = $user;
-        if ($user['role'] === 'admin') {
+        if ($user['role'] === 'admin' || $user['role'] === 'manager') {
             header("Location: dashboard.php");
         } elseif ($user['role'] === 'employee') {
             header("Location: product.php");

@@ -1,7 +1,11 @@
 <?php
-
 session_start();
 include 'db.php';
+
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager' && $_SESSION['user']['role'] != 'admin') {
+    header("Location: index.php");
+    exit();
+}
 
 if (!isset($_GET['id'])) {
     echo "ไม่พบรายการที่ต้องการแก้ไข";

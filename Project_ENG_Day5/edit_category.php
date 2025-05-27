@@ -3,7 +3,7 @@ session_start();
 
 include 'db.php';
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager' && $_SESSION['user']['role'] != 'admin') {
     header("Location: index.php");
     exit();
 }

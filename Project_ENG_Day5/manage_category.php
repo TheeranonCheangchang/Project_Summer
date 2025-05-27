@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'manager' && $_SESSION['user']['role'] != 'admin') {
     header("Location: index.php");
     exit();
 }
@@ -15,95 +15,37 @@ $categories = $conn->query("SELECT * FROM categories");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Categories</title>
+    <title>จัดการแผนก</title>
     <link rel="stylesheet" href="sidebar_menu\sidebar.css">
-    <style>
-    .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            color: black;
-        }
-        th {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        .edit-btn {
-            background: #007bff;
-            color: white;
-        }
-        .edit-btn:hover {
-            background: #0056b3;
-        }
-        .delete-btn {
-            background: #dc3545;
-            color: white;
-        }
-        .delete-btn:hover {
-            background: #c82333;
-        }
-        .add-category {
-            margin-top: 20px;
-            display: inline-block;
-            padding: 12px 20px;
-            background: #28a745;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .add-category:hover {
-            background: #218838;
-        }
-    </style>
 </head>
 <body>
     <?php include 'sidebar_menu\sidebar.php'; ?>
     <div class="container">
-        <h2>Manage Categories</h2>
+        <h2>จัดการแผนก</h2>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Category Name</th>
-                <th>Actions</th>
+                <th>รหัส</th>
+                <th>ชื่อแผนก</th>
+                <th>รายละเอียด</th>
             </tr>
             <?php while ($category = $categories->fetch_assoc()): ?>
             <tr>
                 <td><?php echo htmlspecialchars($category['id']); ?></td>
                 <td><?php echo htmlspecialchars($category['name']); ?></td>
                 <td>
-                    <a href="edit_category.php?id=<?php echo $category['id']; ?>" class="btn edit-btn">Edit</a>
-                    <a href="delete_category.php?id=<?php echo $category['id']; ?>" class="btn delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
+                    <form action="edit_category.php" method="get" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
+                        <button type="submit" class="edit-btn">Edit</button>
+                    </form>
+                    <form action="delete_category.php" method="get" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                        <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
                 </td>
             </tr>
             <?php endwhile; ?>
         </table>
-        <a href="add_category.php" class="add-category">Add New Category</a>
+        <a href="add_category.php" class="add-category">เพิ่มแผนกใหม่</a>
     </div>
 </body>
 </html>
